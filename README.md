@@ -213,7 +213,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 If you have any questions or need help customizing your portfolio, feel free to:
 - Open an issue on GitHub
-- Contact me at your.email@example.com
+- Contact me at adhiseptianngrh@gmail.com
 
 ## 🙏 Acknowledgments
 

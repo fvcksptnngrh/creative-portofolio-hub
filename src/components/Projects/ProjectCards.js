@@ -5,7 +5,13 @@ const ProjectCard = ({ title, description, image, technologies, github, demo, fe
   return (
     <div className={`project-card ${featured ? 'featured' : ''}`}>
       <div className="project-image">
-        <div className="project-icon">{image}</div>
+        <div className="project-icon">
+          {typeof image === 'string' && image.startsWith('/') ? (
+            <img src={image} alt={title} />
+          ) : (
+            <span role="img" aria-label="project-emoji">{image}</span>
+          )}
+        </div>
       </div>
       
       <div className="project-content">

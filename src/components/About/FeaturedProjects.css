@@ -1,0 +1,32 @@
+.featured-projects-section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.featured-projects-section .section-subtitle {
+  font-size: 2.5em; /* Ukuran font yang lebih besar untuk subjudul */
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.featured-projects-section p {
+  text-align: center;
+  color: #c5c5c5;
+  margin-bottom: 40px;
+}
+
+/* Menggunakan kembali grid dari Projects.css agar konsisten */
+/* Tidak perlu mendefinisikan ulang .projects-grid jika sudah global */
+/* Namun, jika diperlukan, kita bisa menambahkan penyesuaian di sini. */
+
+/* Contoh: kita bisa membuat kartu proyek unggulan sedikit lebih menonjol */
+.featured-projects-section .project-card-view {
+  box-shadow: 0 4px 20px 4px rgba(138, 43, 226, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.featured-projects-section .project-card-view:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 30px 6px rgba(138, 43, 226, 0.3);
+} 

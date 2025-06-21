@@ -1,7 +1,6 @@
 import React from 'react';
 import Techstack from './Techstack';
 import Toolstack from './Toolstack';
-import Github from './Github';
 import './About.css';
 
 const About = () => {
@@ -68,11 +67,6 @@ const About = () => {
         <div className="tools-section">
           <h3>Tools I <span className="purple">Use</span></h3>
           <Toolstack />
-        </div>
-
-        <div className="github-section">
-          <h3>Days I <span className="purple">Code</span></h3>
-          <Github />
         </div>
       </div>
     </section>

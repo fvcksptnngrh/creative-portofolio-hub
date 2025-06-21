@@ -6,15 +6,15 @@ const Resume = () => {
 
   const education = [
     {
-      degree: "Bachelor of Computer Science",
-      institution: "University Name",
-      year: "2020 - 2024",
+      degree: "Informatics Engineering",
+      institution: "Satya Wacana Christian University",
+      year: "2022 - present",
       description: "Studied computer science with focus on software engineering and web development."
     },
     {
       degree: "High School Diploma",
-      institution: "High School Name",
-      year: "2018 - 2020",
+      institution: "SMK NEGERI PRINGSURAT",
+      year: "2018 - 2021",
       description: "Completed high school with excellent academic performance."
     }
   ];
@@ -27,10 +27,10 @@ const Resume = () => {
       description: "Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions."
     },
     {
-      position: "Frontend Developer Intern",
-      company: "Startup Company",
-      year: "2022 - 2023",
-      description: "Built responsive user interfaces and implemented modern web technologies. Worked on improving user experience and performance optimization."
+      position: "Frontline Staff",
+      company: "Taman Bunga Celosia",
+      year: "2022 Jan - 2022 Aug",
+      description: "Manage the daily operations of the company, including customer service, sales, and marketing."
     }
   ];
 

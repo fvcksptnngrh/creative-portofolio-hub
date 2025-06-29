@@ -1,71 +1,163 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSpring, useTrail, animated, useInView } from 'react-spring';
 import Techstack from './Techstack';
 import Toolstack from './Toolstack';
 import './About.css';
 
 const About = () => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  const [activeTab, setActiveTab] = useState('about');
+
+  // Animasi untuk section title
+  const titleSpring = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'translateY(0)' : 'translateY(30px)',
+    config: { tension: 120, friction: 18 },
+  });
+
+  // Trail animation untuk konten about
+  const aboutItems = [
+    {
+      key: 'intro',
+      content: (
+        <div className="about-card">
+          <h3>LET ME <span className="gradient-text">INTRODUCE</span> MYSELF</h3>
+          <p>
+            I fell in love with programming and I have at least learnt
+            something, I think… 🤷‍♂️
+          </p>
+        </div>
+      ),
+    },
+    {
+      key: 'languages',
+      content: (
+        <div className="about-card">
+          <h4>Programming Languages</h4>
+          <p>
+            I am fluent in classics like
+            <i>
+              <b className="highlight"> C++, Javascript and Python. </b>
+            </i>
+          </p>
+        </div>
+      ),
+    },
+    {
+      key: 'interests',
+      content: (
+        <div className="about-card">
+          <h4>Areas of Interest</h4>
+          <p>
+            My field of Interest's are building new &nbsp;
+            <i>
+              <b className="highlight">Web Technologies and Products </b> and
+              also in areas related to{" "}
+              <b className="highlight">
+                Machine Learning.
+              </b>
+            </i>
+          </p>
+        </div>
+      ),
+    },
+    {
+      key: 'tech',
+      content: (
+        <div className="about-card">
+          <h4>Modern Technologies</h4>
+          <p>
+            Whenever possible, I also apply my passion for developing products
+            with <b className="highlight">Node.js</b> and
+            <i>
+              <b className="highlight">
+                {" "}
+                Modern Javascript Library and Frameworks
+              </b>
+            </i>
+            &nbsp; like
+            <i>
+              <b className="highlight"> React.js and Next.js</b>
+            </i>
+          </p>
+        </div>
+      ),
+    },
+  ];
+
+  const aboutTrail = useTrail(aboutItems.length, {
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'translateY(0)' : 'translateY(40px)',
+    config: { mass: 1, tension: 120, friction: 18 },
+    delay: 200,
+  });
+
+  // Animasi untuk profile image
+  const profileSpring = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1) rotate(0deg)' : 'scale(0.8) rotate(-10deg)',
+    config: { tension: 100, friction: 20 },
+    delay: 400,
+  });
+
+  // Animasi untuk floating effect
+  const floatSpring = useSpring({
+    loop: { reverse: true },
+    from: { y: 0 },
+    to: { y: 15 },
+    config: { duration: 3000 },
+  });
+
   return (
-    <section id="about" className="about-section">
-      <div className="container">
-        <h2 className="section-title">
-          About <span className="purple">Me</span>
-        </h2>
+    <section id="about" className="about-section modern-about">
+      <div className="about-container" ref={ref}>
+        <animated.h2 className="section-title modern-title" style={titleSpring}>
+          About <span className="gradient-text">Me</span>
+        </animated.h2>
         
-        <div className="about-content">
-          <div className="about-text">
-            <h3>LET ME <span className="purple">INTRODUCE</span> MYSELF</h3>
-            <p>
-              I fell in love with programming and I have at least learnt
-              something, I think… 🤷‍♂️
-            </p>
-            <p>
-              I am fluent in classics like
-              <i>
-                <b className="purple"> C++, Javascript and Python. </b>
-              </i>
-            </p>
-            <p>
-              My field of Interest's are building new &nbsp;
-              <i>
-                <b className="purple">Web Technologies and Products </b> and
-                also in areas related to{" "}
-                <b className="purple">
-                  Machine Learning.
-                </b>
-              </i>
-            </p>
-            <p>
-              Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Node.js</b> and
-              <i>
-                <b className="purple">
-                  {" "}
-                  Modern Javascript Library and Frameworks
-                </b>
-              </i>
-              &nbsp; like
-              <i>
-                <b className="purple"> React.js and Next.js</b>
-              </i>
-            </p>
-          </div>
-          
-          <div className="about-image">
-            <div className="about-profile">
-              <div className="about-image-placeholder">
-                <span>👨‍💻</span>
-              </div>
+        <div className="about-hero">
+          <div className="about-content-grid">
+            <div className="about-text-section">
+              {aboutTrail.map((style, idx) => (
+                <animated.div key={aboutItems[idx].key} style={style}>
+                  {aboutItems[idx].content}
+                </animated.div>
+              ))}
             </div>
+            
+            <animated.div className="about-visual-section" style={profileSpring}>
+              <animated.div className="profile-container" style={floatSpring}>
+                <div className="profile-card">
+                  <div className="profile-avatar">
+                    <span role="img" aria-label="developer">👨‍💻</span>
+                  </div>
+                  <div className="profile-info">
+                    <h4>Full Stack Developer</h4>
+                    <p>Passionate about creating amazing digital experiences</p>
+                  </div>
+                </div>
+              </animated.div>
+            </animated.div>
           </div>
         </div>
 
-        <div className="skills-section">
-          <h3>Professional <span className="purple">Skillset</span></h3>
+        <div className="skills-container">
+          <div className="skills-header">
+            <h3>Professional <span className="gradient-text">Skillset</span></h3>
+            <p>Technologies I work with on a daily basis</p>
+          </div>
           <Techstack />
         </div>
 
-        <div className="tools-section">
-          <h3>Tools I <span className="purple">Use</span></h3>
+        <div className="tools-container">
+          <div className="tools-header">
+            <h3>Tools I <span className="gradient-text">Use</span></h3>
+            <p>Development tools and platforms that power my workflow</p>
+          </div>
           <Toolstack />
         </div>
       </div>

@@ -1,23 +1,100 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 import './ProjectCards.css';
 
-const ProjectCard = ({ title, description, image, technologies, github, demo, featured }) => {
+const ProjectCard = ({ title, description, image, technologies, github, demo, featured, category }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Animasi hover untuk card
+  const cardSpring = useSpring({
+    transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
+    boxShadow: isHovered 
+      ? '0 25px 50px rgba(0, 0, 0, 0.15)' 
+      : '0 10px 30px rgba(0, 0, 0, 0.1)',
+    config: { tension: 300, friction: 20 },
+  });
+
+  // Animasi untuk image
+  const imageSpring = useSpring({
+    transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+    config: { tension: 300, friction: 20 },
+  });
+
+  // Animasi untuk content
+  const contentSpring = useSpring({
+    opacity: isHovered ? 1 : 0.9,
+    transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+    config: { tension: 300, friction: 20 },
+  });
+
   return (
-    <div className={`project-card ${featured ? 'featured' : ''}`}>
-      <div className="project-image">
-        <div className="project-icon">
-          {typeof image === 'string' && image.startsWith('/') ? (
-            <img src={image} alt={title} />
-          ) : (
-            <span role="img" aria-label="project-emoji">{image}</span>
-          )}
+    <animated.div 
+      className={`project-card modern-card ${featured ? 'featured' : ''}`}
+      style={cardSpring}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Featured Badge */}
+      {featured && (
+        <div className="featured-badge">
+          <span>⭐ Featured</span>
+        </div>
+      )}
+
+      {/* Category Badge */}
+      <div className="category-badge">
+        <span>{category || 'Web'}</span>
+      </div>
+
+      {/* Project Image */}
+      <div className="project-image-container">
+        <animated.div className="project-image" style={imageSpring}>
+          <div className="project-icon">
+            {typeof image === 'string' && image.startsWith('/') ? (
+              <img src={image} alt={title} />
+            ) : (
+              <span role="img" aria-label="project-emoji">{image}</span>
+            )}
+          </div>
+        </animated.div>
+        
+        {/* Overlay with links */}
+        <div className="project-overlay">
+          <div className="overlay-links">
+            {github && (
+              <a 
+                href={github} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="overlay-link github-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>📁</span>
+                <span>Code</span>
+              </a>
+            )}
+            {demo && (
+              <a 
+                href={demo} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="overlay-link demo-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>🌐</span>
+                <span>Demo</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
       
-      <div className="project-content">
+      {/* Project Content */}
+      <animated.div className="project-content" style={contentSpring}>
         <h3 className="project-title">{title}</h3>
         <p className="project-description">{description}</p>
         
+        {/* Technologies */}
         <div className="project-technologies">
           {technologies.map((tech, index) => (
             <span key={index} className="tech-tag">
@@ -25,29 +102,8 @@ const ProjectCard = ({ title, description, image, technologies, github, demo, fe
             </span>
           ))}
         </div>
-        
-        <div className="project-links">
-          <a 
-            href={github} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="project-link github-link"
-          >
-            <span>📁</span> Code
-          </a>
-          <a 
-            href={demo} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="project-link demo-link"
-          >
-            <span>🌐</span> Live Demo
-          </a>
-        </div>
-      </div>
-      
-      {featured && <div className="featured-badge">Featured</div>}
-    </div>
+      </animated.div>
+    </animated.div>
   );
 };
 

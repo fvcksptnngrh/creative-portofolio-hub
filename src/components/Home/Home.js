@@ -1,42 +1,86 @@
 import React from 'react';
+import { useSpring, useTrail, animated } from 'react-spring';
 import Type from './Type';
 import './Home.css';
 
+const items = [
+  {
+    key: 'title',
+    content: (
+      <h1 className="home-title">
+        Hi, I am <span className="gradient-text">ADHI SEPTIAN NUGROHO</span>
+      </h1>
+    ),
+  },
+  {
+    key: 'subtitle',
+    content: (
+      <h2 className="home-subtitle">
+        <Type />
+      </h2>
+    ),
+  },
+  {
+    key: 'desc',
+    content: (
+      <p className="home-description">
+        Passionate about creating innovative solutions and turning ideas into reality.<br />
+        I love building applications that solve real-world problems.
+      </p>
+    ),
+  },
+  {
+    key: 'actions',
+    content: (
+      <div className="home-buttons">
+        <a href="#projects" className="btn btn-primary modern-btn">
+          View My Work
+        </a>
+        <a href="#about" className="btn btn-secondary modern-btn">
+          Learn More
+        </a>
+      </div>
+    ),
+  },
+];
+
 const Home = () => {
+  // Trail animasi untuk elemen teks
+  const trail = useTrail(items.length, {
+    from: { opacity: 0, y: 40 },
+    to: { opacity: 1, y: 0 },
+    config: { mass: 1, tension: 120, friction: 18 },
+    delay: 200,
+  });
+
+  // Animasi melayang untuk avatar
+  const avatarSpring = useSpring({
+    loop: { reverse: true },
+    from: { y: 0, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)' },
+    to: { y: 18, boxShadow: '0 16px 48px 0 rgba(31, 38, 135, 0.22)' },
+    config: { duration: 2200 },
+  });
+
   return (
-    <section id="home" className="home-section">
-      <div className="home-content">
-        <div className="home-text">
-          <h1 className="home-title">
-            Hi There, <span className="wave">👋</span>
-          </h1>
-          <h1 className="home-subtitle">
-            I'M <span className="purple">ADHI SEPTIAN NUGROHO</span>
-          </h1>
-          <div className="home-type">
-            <Type />
-          </div>
-          <p className="home-description">
-            Passionate about creating innovative solutions and turning ideas into reality.
-            I love building applications that solve real-world problems.
-          </p>
-          <div className="home-buttons">
-            <a href="#projects" className="btn btn-primary">
-              View My Work
-            </a>
-            <a href="#about" className="btn btn-secondary">
-              Learn More
-            </a>
-          </div>
+    <section id="home" className="home-section modern-bg">
+      <div className="home-hero-container">
+        <div className="home-hero-left">
+          {trail.map((style, idx) => (
+            <animated.div key={items[idx].key} style={{ ...style, transform: style.y.to(y => `translateY(${y}px)`) }}>
+              {items[idx].content}
+            </animated.div>
+          ))}
         </div>
-        <div className="home-image">
-          <div className="profile-image">
-            <div className="image-placeholder">
-              <span>👨‍💻</span>
+        <div className="home-hero-right">
+          <animated.div className="profile-glass" style={avatarSpring}>
+            <div className="profile-avatar">
+              <span role="img" aria-label="avatar" className="avatar-emoji">👨‍💻</span>
             </div>
-          </div>
+          </animated.div>
         </div>
       </div>
+      {/* Optional: Tambahkan partikel/gradient di background dengan CSS */}
+      <div className="home-gradient-bg" />
     </section>
   );
 };

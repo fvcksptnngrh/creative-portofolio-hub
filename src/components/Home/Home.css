@@ -193,4 +193,200 @@
   .image-placeholder {
     font-size: 5rem;
   }
+}
+
+/* Modern Hero Section */
+.home-section.modern-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-hero-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 3rem 2rem;
+  z-index: 2;
+}
+
+.home-hero-left {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffb86c 0%, #a18cd1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.home-subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.home-description {
+  font-size: 1.2rem;
+  color: #eaeaea;
+  opacity: 0.92;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.modern-btn {
+  padding: 0.85rem 2.2rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(90deg, #ffb86c 0%, #a18cd1 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(118,75,162,0.13);
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.modern-btn:hover {
+  transform: scale(1.07) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(118,75,162,0.22);
+  background: linear-gradient(90deg, #a18cd1 0%, #ffb86c 100%);
+}
+
+.btn-secondary.modern-btn {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1.5px solid #fff;
+  box-shadow: none;
+}
+.btn-secondary.modern-btn:hover {
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+  border: 1.5px solid #ffb86c;
+}
+
+.home-hero-right {
+  flex: 0 0 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-glass {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.13);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(12px);
+  border: 2.5px solid rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s;
+}
+.profile-glass:hover {
+  box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.22);
+}
+
+.profile-avatar {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(118,75,162,0.13);
+}
+.avatar-emoji {
+  font-size: 6.5rem;
+  filter: drop-shadow(0 2px 8px rgba(118,75,162,0.13));
+}
+
+/* Gradient/Particle Background */
+.home-gradient-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 80% 20%, #ffb86c33 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, #a18cd133 0%, transparent 60%),
+    linear-gradient(120deg, #667eea44 0%, #764ba244 100%);
+  opacity: 0.7;
+  animation: bgMove 12s linear infinite alternate;
+}
+@keyframes bgMove {
+  0% { background-position: 80% 20%, 20% 80%, 0 0; }
+  100% { background-position: 60% 40%, 40% 60%, 100% 100%; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .home-hero-container {
+    flex-direction: column-reverse;
+    gap: 2.5rem;
+    padding: 2rem 1rem;
+    align-items: center;
+  }
+  .home-hero-right {
+    flex: none;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .profile-glass {
+    width: 220px;
+    height: 220px;
+  }
+  .profile-avatar {
+    width: 130px;
+    height: 130px;
+  }
+  .avatar-emoji {
+    font-size: 3.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .home-title {
+    font-size: 2rem;
+  }
+  .home-subtitle {
+    font-size: 1.2rem;
+  }
+  .home-description {
+    font-size: 1rem;
+  }
+  .home-hero-container {
+    padding: 1rem 0.5rem;
+  }
 } 

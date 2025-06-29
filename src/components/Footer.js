@@ -15,7 +15,7 @@ const Footer = () => {
 
   const socialTrail = useTrail(socialLinks.length, {
     opacity: 1,
-    transform: 'translateY(0)',
+    y: 0,
     config: { tension: 300, friction: 20 },
     delay: 200,
   });
@@ -29,14 +29,14 @@ const Footer = () => {
 
   const contactTrail = useTrail(contactItems.length, {
     opacity: 1,
-    transform: 'translateX(0)',
+    x: 0,
     config: { tension: 300, friction: 20 },
     delay: 100,
   });
 
   // Animasi untuk hover effect
   const linkSpring = useSpring({
-    transform: hoveredLink ? 'scale(1.1)' : 'scale(1)',
+    scale: hoveredLink ? 1.1 : 1,
     boxShadow: hoveredLink 
       ? '0 10px 30px rgba(102, 126, 234, 0.3)' 
       : '0 4px 15px rgba(102, 126, 234, 0.1)',
@@ -58,7 +58,10 @@ const Footer = () => {
                 <animated.div 
                   key={contactItems[index].type}
                   className="contact-item"
-                  style={style}
+                  style={{
+                    opacity: style.opacity,
+                    transform: style.x.to(x => `translateX(${x}px)`),
+                  }}
                 >
                   <span className="contact-icon">{contactItems[index].icon}</span>
                   {contactItems[index].type === 'email' ? (
@@ -88,8 +91,10 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="social-link modern-social-link"
                   style={{
-                    ...style,
-                    ...(hoveredLink === index ? linkSpring : {}),
+                    opacity: style.opacity,
+                    transform: style.y.to(y => `translateY(${y}px)`)
+                      + (hoveredLink === index && linkSpring && linkSpring.scale ? ` scale(${linkSpring.scale.to(s => s)})` : ''),
+                    boxShadow: hoveredLink === index && linkSpring && linkSpring.boxShadow ? linkSpring.boxShadow : undefined,
                   }}
                   onMouseEnter={() => setHoveredLink(index)}
                   onMouseLeave={() => setHoveredLink(null)}

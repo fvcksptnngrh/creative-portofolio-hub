@@ -15,7 +15,7 @@ const About = () => {
   // Animasi untuk section title
   const titleSpring = useSpring({
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(30px)',
+    y: inView ? 0 : 30,
     config: { tension: 120, friction: 18 },
   });
 
@@ -91,7 +91,7 @@ const About = () => {
 
   const aboutTrail = useTrail(aboutItems.length, {
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(40px)',
+    y: inView ? 0 : 40,
     config: { mass: 1, tension: 120, friction: 18 },
     delay: 200,
   });
@@ -99,7 +99,8 @@ const About = () => {
   // Animasi untuk profile image
   const profileSpring = useSpring({
     opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1) rotate(0deg)' : 'scale(0.8) rotate(-10deg)',
+    scale: inView ? 1 : 0.8,
+    rotate: inView ? 0 : -10,
     config: { tension: 100, friction: 20 },
     delay: 400,
   });
@@ -115,7 +116,13 @@ const About = () => {
   return (
     <section id="about" className="about-section modern-about">
       <div className="about-container" ref={ref}>
-        <animated.h2 className="section-title modern-title" style={titleSpring}>
+        <animated.h2
+          className="section-title modern-title"
+          style={{
+            opacity: titleSpring.opacity,
+            transform: titleSpring.y.to(y => `translateY(${y}px)`),
+          }}
+        >
           About <span className="gradient-text">Me</span>
         </animated.h2>
         
@@ -123,14 +130,31 @@ const About = () => {
           <div className="about-content-grid">
             <div className="about-text-section">
               {aboutTrail.map((style, idx) => (
-                <animated.div key={aboutItems[idx].key} style={style}>
+                <animated.div
+                  key={aboutItems[idx].key}
+                  style={{
+                    opacity: style.opacity,
+                    transform: style.y.to(y => `translateY(${y}px)`),
+                  }}
+                >
                   {aboutItems[idx].content}
                 </animated.div>
               ))}
             </div>
             
-            <animated.div className="about-visual-section" style={profileSpring}>
-              <animated.div className="profile-container" style={floatSpring}>
+            <animated.div
+              className="about-visual-section"
+              style={{
+                opacity: profileSpring.opacity,
+                transform: profileSpring.scale.to(s => `scale(${s})`).to(scale => profileSpring.rotate.to(r => `${scale} rotate(${r}deg)`)),
+              }}
+            >
+              <animated.div
+                className="profile-container"
+                style={{
+                  transform: floatSpring.y.to(y => `translateY(${y}px)`),
+                }}
+              >
                 <div className="profile-card">
                   <div className="profile-avatar">
                     <span role="img" aria-label="developer">👨‍💻</span>

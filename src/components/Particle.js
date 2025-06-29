@@ -1,21 +1,10 @@
-import React, { useCallback } from 'react';
-import { loadFull } from 'react-tsparticles';
+import React from 'react';
 import Particles from 'react-tsparticles';
 
 const Particle = () => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async (container) => {
-    // console.log(container);
-  }, []);
-
   return (
     <Particles
       id="tsparticles"
-      init={particlesInit}
-      loaded={particlesLoaded}
       options={{
         background: {
           color: {

@@ -15,14 +15,15 @@ const Projects = () => {
   // Animasi untuk section title
   const titleSpring = useSpring({
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(30px)',
+    y: inView ? 0 : 30,
     config: { tension: 120, friction: 18 },
   });
 
   // Trail animation untuk project cards
   const projectTrail = useTrail(projects.length, {
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.9)',
+    y: inView ? 0 : 50,
+    scale: inView ? 1 : 0.9,
     config: { mass: 1, tension: 120, friction: 18 },
     delay: 300,
   });
@@ -37,8 +38,11 @@ const Projects = () => {
   return (
     <section id="projects" className="projects-section modern-projects">
       <div className="projects-container" ref={ref}>
-        <animated.div className="projects-header" style={titleSpring}>
-          <h2 className="section-title modern-title">
+        <animated.div className="projects-header">
+          <h2 className="section-title modern-title" style={{
+            opacity: titleSpring.opacity,
+            transform: titleSpring.y.to(y => `translateY(${y}px)`),
+          }}>
             My Recent <span className="gradient-text">Works</span>
           </h2>
           <p className="section-subtitle">
@@ -63,7 +67,10 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <animated.div
               key={project.id || index}
-              style={projectTrail[index]}
+              style={{
+                opacity: projectTrail[index].opacity,
+                transform: projectTrail[index].y.to(y => `translateY(${y}px)`).to(t => projectTrail[index].scale.to(s => `${t} scale(${s})`)),
+              }}
               className="project-wrapper"
             >
               <ProjectCard

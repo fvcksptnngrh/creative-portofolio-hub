@@ -28,16 +28,12 @@ const Navbar = () => {
     backgroundColor: isScrolled 
       ? 'rgba(255, 255, 255, 0.95)' 
       : 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: isScrolled ? 'blur(20px)' : 'blur(10px)',
-    boxShadow: isScrolled 
-      ? '0 8px 32px rgba(31, 38, 135, 0.1)' 
-      : 'none',
     config: { tension: 300, friction: 30 },
   });
 
   // Animasi untuk logo
   const logoSpring = useSpring({
-    transform: isScrolled ? 'scale(1.1)' : 'scale(1)',
+    scale: isScrolled ? 1.1 : 1,
     config: { tension: 300, friction: 20 },
   });
 
@@ -45,21 +41,23 @@ const Navbar = () => {
   const menuItems = ['Home', 'About', 'Projects', 'Resume'];
   const menuTrail = useTrail(menuItems.length, {
     opacity: isMobileMenuOpen ? 1 : 0,
-    transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(20px)',
+    x: isMobileMenuOpen ? 0 : 20,
     config: { tension: 300, friction: 20 },
     delay: 100,
   });
 
   // Animasi untuk hamburger menu
   const hamburgerSpring = useSpring({
-    transform: isMobileMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+    rotate: isMobileMenuOpen ? 180 : 0,
     config: { tension: 300, friction: 20 },
   });
 
   return (
-    <animated.nav className="navbar modern-navbar" style={navbarSpring}>
+    <animated.nav className="navbar modern-navbar" style={{ backgroundColor: navbarSpring.backgroundColor }}>
       <div className="navbar-container">
-        <animated.div className="navbar-logo" style={logoSpring}>
+        <animated.div className="navbar-logo" style={{
+          transform: logoSpring.scale.to(s => `scale(${s})`)
+        }}>
           <span className="logo-text gradient-text">Portfolio</span>
         </animated.div>
         
@@ -73,7 +71,10 @@ const Navbar = () => {
                 scrollToSection(menuItems[index].toLowerCase()); 
               }}
               className="nav-link modern-link"
-              style={style}
+              style={{
+                opacity: style.opacity,
+                transform: style.x.to(x => `translateX(${x}px)`),
+              }}
             >
               {menuItems[index]}
             </animated.a>
@@ -83,7 +84,9 @@ const Navbar = () => {
         <animated.div 
           className={`hamburger modern-hamburger ${isMobileMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          style={hamburgerSpring}
+          style={{
+            transform: hamburgerSpring.rotate.to(r => `rotate(${r}deg)`),
+          }}
         >
           <span></span>
           <span></span>

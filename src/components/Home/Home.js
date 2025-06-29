@@ -53,11 +53,11 @@ const Home = () => {
     delay: 200,
   });
 
-  // Animasi melayang untuk avatar
+  // Animasi melayang untuk avatar (hanya y)
   const avatarSpring = useSpring({
     loop: { reverse: true },
-    from: { y: 0, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)' },
-    to: { y: 18, boxShadow: '0 16px 48px 0 rgba(31, 38, 135, 0.22)' },
+    from: { y: 0 },
+    to: { y: 18 },
     config: { duration: 2200 },
   });
 
@@ -66,13 +66,24 @@ const Home = () => {
       <div className="home-hero-container">
         <div className="home-hero-left">
           {trail.map((style, idx) => (
-            <animated.div key={items[idx].key} style={{ ...style, transform: style.y.to(y => `translateY(${y}px)`) }}>
+            <animated.div
+              key={items[idx].key}
+              style={{
+                opacity: style.opacity,
+                transform: style.y.to(y => `translateY(${y}px)`),
+              }}
+            >
               {items[idx].content}
             </animated.div>
           ))}
         </div>
         <div className="home-hero-right">
-          <animated.div className="profile-glass" style={avatarSpring}>
+          <animated.div
+            className="profile-glass"
+            style={{
+              transform: avatarSpring.y.to(y => `translateY(${y}px)`),
+            }}
+          >
             <div className="profile-avatar">
               <span role="img" aria-label="avatar" className="avatar-emoji">👨‍💻</span>
             </div>

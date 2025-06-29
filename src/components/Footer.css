@@ -1,10 +1,12 @@
-/* Modern Footer */
+/* Modern Footer - Monokrom */
 .footer.modern-footer {
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  color: white;
+  background: linear-gradient(135deg, #181818 0%, #23272f 100%);
+  color: #e0e0e0;
   padding: 80px 0 40px;
   position: relative;
   overflow: hidden;
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.18);
 }
 
 .footer-container {
@@ -32,7 +34,7 @@
 .footer-title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 1rem;
   position: relative;
 }
@@ -44,7 +46,7 @@
   left: 0;
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #ffb86c 0%, #a18cd1 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #e9ecef 100%);
   border-radius: 2px;
 }
 
@@ -55,7 +57,7 @@
   margin-bottom: 1rem;
 }
 
-/* Contact Info */
+/* Contact Info - Monokrom */
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -87,9 +89,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
   border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
 }
 
 .contact-item a {
@@ -100,7 +102,7 @@
 }
 
 .contact-item a:hover {
-  color: #ffb86c;
+  color: #ffffff;
 }
 
 .contact-item span {
@@ -108,7 +110,7 @@
   font-weight: 500;
 }
 
-/* Social Links */
+/* Social Links - Monokrom */
 .social-links {
   display: flex;
   flex-direction: column;
@@ -120,12 +122,12 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(30,30,30,0.85);
+  color: #fff;
   text-decoration: none;
   border-radius: 15px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255,255,255,0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -138,7 +140,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
   transition: left 0.3s ease;
   z-index: -1;
 }
@@ -148,7 +150,8 @@
 }
 
 .social-link.modern-social-link:hover {
-  color: white;
+  background: rgba(60,60,60,0.95);
+  color: #fff;
   transform: translateX(10px);
 }
 
@@ -159,13 +162,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(40,40,40,0.2);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .social-link.modern-social-link:hover .social-icon {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(60,60,60,0.3);
   transform: scale(1.1);
 }
 
@@ -176,12 +179,13 @@
 
 /* Footer Bottom */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255,255,255,0.08);
   padding-top: 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  color: #b0b0b0;
 }
 
 .copyright,
@@ -201,7 +205,7 @@
   50% { transform: scale(1.2); }
 }
 
-/* Background Effects */
+/* Background Effects - Monokrom */
 .footer.modern-footer::before {
   content: '';
   position: absolute;
@@ -209,8 +213,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(255, 184, 108, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(161, 140, 209, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 

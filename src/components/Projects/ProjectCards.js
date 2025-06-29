@@ -7,30 +7,30 @@ const ProjectCard = ({ title, description, image, technologies, github, demo, fe
 
   // Animasi hover untuk card
   const cardSpring = useSpring({
-    transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
-    boxShadow: isHovered 
-      ? '0 25px 50px rgba(0, 0, 0, 0.15)' 
-      : '0 10px 30px rgba(0, 0, 0, 0.1)',
+    y: isHovered ? -10 : 0,
+    scale: isHovered ? 1.02 : 1,
     config: { tension: 300, friction: 20 },
   });
 
   // Animasi untuk image
   const imageSpring = useSpring({
-    transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+    scale: isHovered ? 1.1 : 1,
     config: { tension: 300, friction: 20 },
   });
 
   // Animasi untuk content
   const contentSpring = useSpring({
     opacity: isHovered ? 1 : 0.9,
-    transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+    y: isHovered ? -5 : 0,
     config: { tension: 300, friction: 20 },
   });
 
   return (
     <animated.div 
       className={`project-card modern-card ${featured ? 'featured' : ''}`}
-      style={cardSpring}
+      style={{
+        transform: cardSpring.y.to((y) => `translateY(${y}px)`).to((t) => cardSpring.scale.to((s) => `${t} scale(${s})`)),
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -48,7 +48,9 @@ const ProjectCard = ({ title, description, image, technologies, github, demo, fe
 
       {/* Project Image */}
       <div className="project-image-container">
-        <animated.div className="project-image" style={imageSpring}>
+        <animated.div className="project-image" style={{
+          transform: imageSpring.scale.to(s => `scale(${s})`)
+        }}>
           <div className="project-icon">
             {typeof image === 'string' && image.startsWith('/') ? (
               <img src={image} alt={title} />
@@ -90,7 +92,10 @@ const ProjectCard = ({ title, description, image, technologies, github, demo, fe
       </div>
       
       {/* Project Content */}
-      <animated.div className="project-content" style={contentSpring}>
+      <animated.div className="project-content" style={{
+        opacity: contentSpring.opacity,
+        transform: contentSpring.y.to(y => `translateY(${y}px)`)
+      }}>
         <h3 className="project-title">{title}</h3>
         <p className="project-description">{description}</p>
         
